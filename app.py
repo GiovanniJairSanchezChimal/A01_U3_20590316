@@ -1,5 +1,3 @@
-# app.py
-
 from flask import Flask, render_template, request, redirect, url_for
 from models import db, Album
 from datetime import datetime
@@ -7,11 +5,15 @@ from datetime import datetime
 app = Flask(__name__)
 
 # Configuración de la base de datos
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://samvela_5p8g_user:RHlKzHOd8J3aqEmyc4to4rSo90hioz6e@dpg-d0h860q4d50c73b9q14g-a.oregon-postgres.render.com/samvela_5p8g'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://samuel_user:Pass123@postgres-service:5432/samuel_database'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializamos la base de datos
 db.init_app(app)
+
+# Crear las tablas si no existen
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def index():
@@ -74,4 +76,3 @@ def delete(id):
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
-
